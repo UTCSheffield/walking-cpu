@@ -3,6 +3,10 @@ body {
     font-family:"sans serif";
 }
 
+td {
+  font-family: Andale Mono,AndaleMono,monospace; 
+}
+
 div.worksheet {
     font-size:16px;
 }
@@ -150,7 +154,7 @@ div.worksheet div.notes {
 }
 
 div.worksheet div.instructions table{
-    font-size: 25px;
+    font-size: 14px;
 }
 
 div.printpage {
@@ -168,6 +172,7 @@ div.poster h1.roomname {
 
 
 div.poster h1.data {
+  font-family: Andale Mono,AndaleMono,monospace; 
   font-size: 2000%;
   padding:0px;
   margin:0px;
