@@ -65,8 +65,10 @@
       fs.mkdirSync(options.outputdir);
     }
     
-    var aInstructionNames = ["A", "B", "C", "D", "E", "F", "2", "3"];
+    //var aInstructionNames = ["A", "B", "C", "D", "E", "F", "2", "3"];
     
+    var aInstructionNames = ["00","01","02","03","04","05","06","07","08","09", "0A", "0B", "0C", "0D", "0E", "0F"];
+
     var aRoomGroups = JSON.parse(fs.readFileSync("roomconfig/"+options.roomconfig+".json").toString());
     
     var aNumbers = options.numbers.split(",");//[6,6,5,3];
@@ -83,29 +85,15 @@
         }
     }
     
-    page = fs.readFileSync("templates/Posters.handlebars", "utf8");
-    var oPostersTemplate = Handlebars.compile(page);
-    html = oPostersTemplate({"aPosters":aPosters});
+    door_page = fs.readFileSync("templates/Posters.handlebars", "utf8");
+    var oPostersTemplate = Handlebars.compile(door_page);
+    door_html = oPostersTemplate({"aPosters":aPosters});
         
-    fs.writeFile(options.outputdir+"/posters.html", html, function (err) {
+    fs.writeFile(options.outputdir+"/posters.html", door_html, function (err) {
       if (err){ return console.log(err);}
       console.log('html > posters.html');
     });
 
-    phantom.create(function (ph) {                                                          
-        ph.createPage(function (page) {
-          page.set('paperSize', {
-            format: 'A4'
-          }, function() {
-            page.open(options.outputdir+"/posters.html", function (status) {
-              page.render(options.outputdir+"/posters.pdf", function(){
-                console.log("Posters sheets rendered ", status);
-                ph.exit();
-              });
-            });
-          });
-        });
-    });
 
     //process.exit()
     var iClass = sClass.split("").reduce(function(previousValue, currentValue, index, array) {
@@ -359,7 +347,7 @@
                 }
                 
                 //Would a JMP take us out of the program?
-                if(val.iNextStep >= this.iSteps)
+                if(val.iNextStep >= this.iSteps || val.iNextStep <= val.iStep)
                 { 
                     return false;
                 }
@@ -404,24 +392,43 @@
         }
     }
     
-    var page = fs.readFileSync("templates/teachers.handlebars", "utf8");
-    var oTeachersTemplate = Handlebars.compile(page);
-    var html = oTeachersTemplate({"aWorksheets":aWorksheets, "sGroupName":options.groupname});
+    var teachers_page = fs.readFileSync("templates/teachers.handlebars", "utf8");
+    var oTeachersTemplate = Handlebars.compile(teachers_page);
+    var teachers_html = oTeachersTemplate({"aWorksheets":aWorksheets, "sGroupName":options.groupname});
         
-    fs.writeFile(options.outputdir+"/teachers.html", html, function (err) {
+    fs.writeFile(options.outputdir+"/teachers.html", teachers_html, function (err) {
       if (err){ return console.log(err);}
       console.log('html > teachers.html');
     });
 
-    page = fs.readFileSync("templates/worksheets.handlebars", "utf8");
-    var oWorksheetsTemplate = Handlebars.compile(page);
-    html = oWorksheetsTemplate({"aWorksheets":aWorksheets});
+    worksheets_page = fs.readFileSync("templates/worksheets.handlebars", "utf8");
+    var oWorksheetsTemplate = Handlebars.compile(worksheets_page);
+    worksheets_html = oWorksheetsTemplate({"aWorksheets":aWorksheets});
         
-    fs.writeFile(options.outputdir+"/worksheets.html", html, function (err) {
+    fs.writeFile(options.outputdir+"/worksheets.html", worksheets_html, function (err) {
       if (err){ return console.log(err);}
-      console.log('html > worksheets.html');
+      console.log('worksheets_html > worksheets.html');
     });
 
+
+    /* // PDF creation not needed anymore
+    phantom.create(function (ph) {                                                          
+      ph.createPage(function (door_page) {
+        door_page.set('paperSize', {
+          format: 'A4'
+        }, function() {
+          page.open(options.outputdir+"/posters.html", function (status) {
+            page.render(options.outputdir+"/posters.pdf", function(){
+              console.log("Posters sheets rendered ", status);
+              ph.exit();
+            });
+          });
+        });
+      });
+  });
+
+
+  
     phantom.create(function (ph) {                                                          
         //console.log("creating phantom for "+sPersonID);
         ph.createPage(function (page) {
@@ -445,4 +452,4 @@
           });
         });
     });
-    
+    */
