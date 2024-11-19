@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/EduMake/walking-cpu.git"
+    "url": "git://github.com/UTCSheffield/walking-cpu.git"
   },
   "author": "Martyn Eggleton",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EduMake/walking-cpu/issues"
+    "url": "https://github.com/UTCSheffield/walking-cpu/issues"
   }
 }
