@@ -137,7 +137,6 @@
         sGroupName:"",
         iInstructionSet: 0,
         iSheetNumber: 1,
-        iSteps:6,
         iPosition:1,
         aResults:[],
         aRandomNumbers:[],
@@ -151,10 +150,9 @@
         init: function init(iSheetNumber, iInstructionSet, sGroupName) {
             this.sGroupName = sGroupName;
             this.iInstructionSet = iInstructionSet;
-            
             this.oLevel = clone(aLevels[this.iInstructionSet]);
-            
             this.aAvailableInstructions = clone(this.oLevel.aRoomInstructions);
+            this.iSteps = clone(this.oLevel.iSteps);
             this.aInstructions = clone(this.oLevel.aInstructions);
             for(var i = 0; i<this.aInstructions.length; i++) {
               this.aInstructions[i].sData = aInstructionNames[i];
@@ -175,6 +173,7 @@
             var aFinalList = [];
             if(this.aValid.length) {
               aFinalList = this.getLevel(this.aValid, 1, aFinalList);
+              console.log("aFinalList", aFinalList);
               this.aChosen = aFinalList; 
             } else {
                 console.log("No Valids to be chosen");
@@ -209,7 +208,11 @@
         
         //the guts stips out invalid options
         genValidList:function(iStep, sType, iCurrVal, sCurrentOperation, iStepsMapped, sCurrentRoom, aCurrInstrSet) {
-            //console.log("iStep =", iStep); console.log("sType =", sType); console.log("iCurrVal =", iCurrVal);console.log("sCurrentOperation =", sCurrentOperation);           console.log("iStepsMapped =", iStepsMapped);            console.log("sCurrentRoom =", sCurrentRoom);            console.log("aCurrInstrSet =", aCurrInstrSet.length);
+            //console.log("iStep =", iStep); console.log("sType =", sType); console.log("iCurrVal =", iCurrVal);console.log("sCurrentOperation =", sCurrentOperation);
+            //console.log("iStepsMapped =", iStepsMapped);
+            ///console.log("sCurrentRoom =", sCurrentRoom);
+            //console.log("aCurrInstrSet =", aCurrInstrSet.length);
+            
             var aNextValid = aCurrInstrSet.filter(function(aInstruction){
                 if (aInstruction.sRoomName === sCurrentRoom)
                 { 
@@ -355,7 +358,8 @@
                 return true;
             });   
             
-            aIntList = aIntList.slice(0,5);
+            //aIntList = aIntList.slice(0,5);
+            aIntList = aIntList.slice(0, 7);
             
             //have we stil got steps to work out
             if(iStepsMapped < this.iSteps &&  iStep < this.iSteps )
