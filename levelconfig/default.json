@@ -10,9 +10,10 @@
         "iSteps":5,
         "sStartType":"both",
         "sTemplate":"operation1col",
-        "fetch":"Go to the next classroom (RAM address) in 'Your Program' & read the data on the door. Write it in the 'Data' column.",
-        "decode":"Look up what the data on the door (OP Code) means in the 'Instruction Set'. Write it in the 'Decoded' column.",
-        "execute":"Do the mathematical operation to your Accumulator. Write the answer in the 'Accumulator' column.",
+        "old-fetch":"<li><b>MAR</b>=<b>Program Counter</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'</li><li><b>MDR</b>=<b>Data</b> on the poster</li>",
+        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
+        "decode":"<li>Look up what the data on the door (OP Code) means in the 'Instruction Set'.</li><li>Write it in the 'Decoded' column.</li>",
+        "execute":"<li>Do the mathematical operation to your Accumulator.</li><li>Write the answer in the 'Accumulator' column.</li>",
         "aInstructions":[
             {"operation":"+", "operand":0, "limit":0},
             {"operation":"+", "operand":1},
@@ -76,7 +77,7 @@
         "iMaxNumber":500,
         "sStartType":"operation",
         "sTemplate":"operation2col",
-        "fetch":"Go to the next classroom (RAM address) in 'Your Program' & read the data on the door.  Write it in the 'Data' column.",
+        "fetch":"<b>MAR</b> = <b>Program Counter</b><br/>Go to <b>Physical Location<b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'<br/><b>MDR = <b>Data</b> on the poster",
         "decode":"Look up what the data on the door means in the 'Instruction Set' either an OP Code for a maths Operation or an Operand (number), depending what you expect next, starting with an operation.\nWrite it in the 'Operation' or 'Operand' column.",
         "execute":"If you have decoded an operation keep it until you decode an Operand (number) then perform that calculation. Write the result in the 'Accumulator' column.",
         "aInstructions":[

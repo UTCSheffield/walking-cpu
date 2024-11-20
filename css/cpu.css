@@ -7,6 +7,7 @@ td {
   font-family: Andale Mono,AndaleMono,monospace; 
 }
 
+
 div.worksheet {
     font-size:16px;
 }
@@ -76,6 +77,26 @@ th, td{
   width:16%;
 }
 
+.worksheet table {
+  border-style: none;
+}
+
+.worksheet th, .worksheet td {
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+
+.worksheet td.gap, .worksheet th.gap{
+  border-style: none;
+}
+
+.worksheet th.h3 {
+  font-size: 20px;
+  border-style: none;
+  padding-bottom: 1em;
+}
+
+
 .worksheet th.ram , .worksheet td.ram{
   width:12%;
 }
@@ -125,7 +146,14 @@ div.worksheet div.diagram div.box{
 }
 
 div.worksheet div.diagram div.box p{
-    font-size:80%;
+  font-size:80%;
+  text-align: left;
+}
+
+div.worksheet div.diagram div.box ul{
+  font-size:80%;
+  text-align: left;
+  padding-left: 15px;
 }
   
 div.worksheet div.diagram div.fetch{
@@ -156,6 +184,7 @@ div.worksheet div.notes {
 div.worksheet div.instructions table{
     font-size: 14px;
 }
+
 
 div.printpage {
     page-break-after: always;

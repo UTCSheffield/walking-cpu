@@ -25,43 +25,57 @@
               <img alt="" src="../cycle-3.svg">
               <div class="box fetch">
                 <h4>Fetch</h4>
-                <p>{{oLevel.fetch}}</p>
+                <ul>{{{oLevel.fetch}}}</ul>
               </div>
               <div class="box decode">
                 <h4>Decode</h4>
-                <p>{{oLevel.decode}}</p>
+                <ul>{{{oLevel.decode}}}</ul>
               </div>
               <div class="box execute">
                 <h4>Execute</h4>
-                <p>{{oLevel.execute}}</p>
+                <ul>{{{oLevel.execute}}}</ul>
               </div>
             </div>
             
-            <h3>Your Program</h3>
             <table>
+                <tr>
+                  <th colspan="2" class="h3">Your Program </th>
+                  <td class="gap">&nbsp;</td>
+                  <th class="h3" colspan="{{#if oLevel.gradeA}}6{{else}}5{{/if}}">Your Simulation</th>
+                </tr> 
                 <tr>
                     <th class="ram">RAM Address</th>
                     <th class="physical">Physical Location</th>
-                    <th>Data</th>
+                    <td class="gap">&nbsp;</td>
+                    <th>Memory Address Register (MAR)<!-- / Data--></th>
+                    <!--<th>Data</th>-->
+                    <th>Memory Data Register (MDR)<!-- / Data--></th>
                     {{#if oLevel.gradeA}}
-                        <th>Operation</th>
+                        <!--<th>Operation</th>-->
+                        <th>Current Instruction Register (CIR) / Operation </th>
                         <th>Operand</th>
                     {{else}}
                       <th>Decoded</th>
                     
                     {{/if}}
                     <th>Accumulator</th>
+                    <th>Program Counter</th>
                 </tr>
                 <tr>
                   <td>0</td>
-                  <td class="firstnumber" colspan="{{#if oLevel.gradeA}}4{{else}}3{{/if}}">First Number</td>
-                  <td >
+                  <td class="firstnumber" >Start</td>
+                  <td class="gap">&nbsp;</td>
+                  <td class="firstnumber" colspan="{{#if oLevel.gradeA}}4{{else}}3{{/if}}"></td>
+                  <td>
                    {{iSheetNumber}}
                   </td>
+                  <td>1</td>
                 </tr>
                 {{#aChosen}}<tr>
                     <td>{{iStep}}</td>
                     <td>{{sRoomName}}</td>
+                    <td class="gap">&nbsp;</td>
+                    <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     {{#if ../oLevel.gradeA}}
                         {{#if ../oLevel.gradeAA}}
@@ -79,6 +93,7 @@
                             <td {{#if bListOperation}}class="blocked"{{/if}}>&nbsp;</td>
                         {{/if}}
                     {{/if}}
+                    <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>{{/aChosen}}
             </table>
