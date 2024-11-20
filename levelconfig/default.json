@@ -1,7 +1,7 @@
 [
     {
         "sLevelName":"The Basic Idea",
-        "sGrade":"C",
+        "sGrade":"GCSE 4",
         "gradeAA": false,
         "gradeA": false,
         "gradeB": false,
@@ -11,9 +11,9 @@
         "sStartType":"both",
         "sTemplate":"operation1col",
         "old-fetch":"<li><b>MAR</b>=<b>Program Counter</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'</li><li><b>MDR</b>=<b>Data</b> on the poster</li>",
-        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
-        "decode":"<li>Look up what the data on the door (OP Code) means in the 'Instruction Set'.</li><li>Write it in the 'Decoded' column.</li>",
-        "execute":"<li>Do the mathematical operation to your Accumulator.</li><li>Write the answer in the 'Accumulator' column.</li>",
+        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b> on the next line in <b>Your Simulation</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b>} which matches the <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
+        "decode":"<li>Look up the <b>Instruction</b> in the <b>Instruction Set</b> for the <b>MDR</b> (Data)</li><li>Write it in the <b>Decoded</b> column.</li>",
+        "execute":"<li>Do the <b>Decoded</b> maths to your <b>Accumulator</b>.</li><li>Copy the result in to the <b>ACC</b> column.</li><li>Add 1 to the <b>Program Counter</b></li>",
         "aInstructions":[
             {"operation":"+", "operand":0, "limit":0},
             {"operation":"+", "operand":1},
@@ -35,7 +35,7 @@
     },
     {
         "sLevelName":"The Idea",
-        "sGrade":"B",
+        "sGrade":"GCSE 5",
         "iSteps":6,
         "gradeAA": false,
         "gradeA": false,
@@ -44,9 +44,10 @@
         "iMaxNumber":200,
         "sStartType":"operation",
         "sTemplate":"operation1col",
-        "fetch":"Go to the next classroom (RAM address) in 'Your Program' & read the data on the door. Write it in the 'Data' column.",
-        "decode":"Look up what the data on the door means in the 'Instruction Set' either it is an OP Code for a maths Operation or a number. Write it in the 'Decoded' column.",
-        "execute":"If you have decoded an operation keep it until you decode a number then perform that calculation. Write the answer in the 'Accumulator' column.",
+
+        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b> on the next line in <b>Your Simulation</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b>} which matches the <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
+        "decode":"<li>Look up the <b>Instruction</b> in the <b>Instruction Set</b> for the <b>MDR</b> (Data)</li><li>Either it is an <b>Operation</b> or an <b>Operand</b> (number to to the operation with.</li><li>Write it in the <b>Decoded</b> column.</li>",
+        "execute":"<li>If you have decoded an Operation keep it until you decode an operand</li><li>Do the <b>Decoded</b> math to your <b>Accumulator</b>.</li><li>Copy the result in to the <b>ACC</b> column.</li><li>Add 1 to the <b>Program Counter</b></li>",
         "aInstructions":[
             {"operation":"NOP", "operand":null, "limit":0},
             {"operation":"+", "operand":null},
@@ -68,7 +69,7 @@
     },
     {
         "sLevelName":"Von Neuman",
-        "sGrade":"A",
+        "sGrade":"GCSE 6",
         "iSteps":8,
         "gradeAA": false,
         "gradeA": true,
@@ -77,9 +78,9 @@
         "iMaxNumber":500,
         "sStartType":"operation",
         "sTemplate":"operation2col",
-        "fetch":"<b>MAR</b> = <b>Program Counter</b><br/>Go to <b>Physical Location<b> (<b>RAM address</b> which matches <b>MAR</b>) in 'Your Program'<br/><b>MDR = <b>Data</b> on the poster",
-        "decode":"Look up what the data on the door means in the 'Instruction Set' either an OP Code for a maths Operation or an Operand (number), depending what you expect next, starting with an operation.\nWrite it in the 'Operation' or 'Operand' column.",
-        "execute":"If you have decoded an operation keep it until you decode an Operand (number) then perform that calculation. Write the result in the 'Accumulator' column.",
+        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b> on the next line in <b>Your Simulation</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b>} which matches the <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
+        "decode":"<li>Look up the <b>Instruction</b> in the <b>Instruction Set</b> for the <b>MDR</b> (Data)</li><li>Either it is an <b>Operation</b> or an <b>Operand</b> depending what you expect next, (start with an operation).</li><li>Write it in the <b>Operation</b> or <b>Operand</b> column.</li>",
+        "execute":"<li>If you have decoded an <b>Operation</b> that takes an operand, keep it until you decode an <b>Operand</b></li><li>Then perform that calculation to <b>Accumulator</b> and copy the result in to the <b>ACC</b> column.</li><li>Add 1 to the <b>Program Counter</b></li>",
         "aInstructions":[
             {"operation":"NOP", "operand":0, "limit":0},
             {"operation":"+", "operand":1},
@@ -101,7 +102,7 @@
     },
     {
         "sLevelName":"Proper CPU",
-        "sGrade":"A*",
+        "sGrade":"GCSE 7",
         "iSteps":10,
         "gradeAA": true,
         "gradeA": true,
@@ -110,9 +111,9 @@
         "iMaxNumber":1000,
         "sStartType":"operation",
         "sTemplate":"operation2col",
-        "fetch":"Go to the next classroom (RAM address) in 'Your Program' & read the data on the door.  Write it in the 'Data' column.",
-        "decode":"Look up what the data on the door means in the 'Instruction Set' either an OP Code for an Operation or a number (Operand), depending what you expect next, starting with an operation.\nWrite it in the 'Operation' or 'Operand' column.",
-        "execute":"If you have decoded an operation that needs an Operand (number) keep it until you decode an Operand (number) then perform that calculation. Write the result in the 'Accumulator' column.",
+        "fetch":"<li>Copy <b>Program Counter</b> into <b>MAR</b> on the next line in <b>Your Simulation</b></li><li>Go to <b>Physical Location</b> (<b>RAM address</b>} which matches the <b>MAR</b>) in 'Your Program'</li><li>Copy <b>Data</b>  on the poster, in to <b>MDR</b></li>",
+        "decode":"<li>Look up the <b>Instruction</b> in the <b>Instruction Set</b> for the <b>MDR</b> (Data)</li><li>Either it is an <b>Operation</b> or an <b>Operand</b> depending what you expect next, (start with an operation).</li><li>Write it in the <b>Operation</b> or <b>Operand</b> column.</li>",
+        "execute":"<li>If you have decoded an <b>Operation</b> that takes an operand, keep it until you decode an <b>Operand</b></li><li>Then perform that calculation to <b>Accumulator</b> and copy the result in to the <b>ACC</b> column.</li><li>If the <b>Operation</b> is <b>JMP</b> copy the <b>Operand</b> into <b>Program Counter</b></li><li>Else add 1 to the <b>Program Counter</b></li>",
         "aInstructions":[
             {"operation":"NOP", "operand":0, "limit":0},
             {"operation":"+", "operand":1, "limit":1},

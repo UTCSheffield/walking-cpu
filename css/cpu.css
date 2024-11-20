@@ -9,7 +9,7 @@ td {
 
 
 div.worksheet {
-    font-size:16px;
+    font-size:14px;
 }
 
 div.printpage {
@@ -120,7 +120,7 @@ div.worksheet div.student th, div.worksheet div.student td{
 }
 
 div.worksheet div.diagram {
-    height: 400px;
+    height: 350px;
     padding:0;
     margin:0;
     text-align: center;  
@@ -128,8 +128,8 @@ div.worksheet div.diagram {
 
 
 div.worksheet div.diagram img{
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
 }
 
 div.worksheet div.diagram div.box{
@@ -158,7 +158,8 @@ div.worksheet div.diagram div.box ul{
   
 div.worksheet div.diagram div.fetch{
     left:30%;
-    top:-350px;
+    top:-330px;
+    height:150px;
 }
 
 div.worksheet div.diagram div.decode{
