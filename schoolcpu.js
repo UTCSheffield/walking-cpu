@@ -84,7 +84,7 @@
             });
         }
     }
-    
+
     door_page = fs.readFileSync("templates/Posters.handlebars", "utf8");
     var oPostersTemplate = Handlebars.compile(door_page);
     door_html = oPostersTemplate({"aPosters":aPosters});
@@ -120,18 +120,14 @@
             }
             for(var j = 0; j<oLevel.aInstructions[i].limit; j++) {
                 var oRoomInstructions = clone(oLevel.aInstructions[i]);
-                //console.log("oRoomInstructions =", oRoomInstructions);
                 oRoomInstructions.sData = aInstructionNames[i];
                 oRoomInstructions.sRoomName = aRoomGroups[i][j];
                 oLevel.aRoomInstructions.push(oRoomInstructions);
             }
         }
         
-        //oLevel.aRoomInstructions = arrayShuffle(oLevel.aRoomInstructions);
-        //console.log("oLevel.aRoomInstructions =", oLevel.aRoomInstructions);
         return oLevel;
     });
-    
     
     var Worksheet = {
         sGroupName:"",
@@ -173,11 +169,23 @@
             var aFinalList = [];
             if(this.aValid.length) {
               aFinalList = this.getLevel(this.aValid, 1, aFinalList);
-              console.log("aFinalList", aFinalList);
-              this.aChosen = aFinalList; 
             } else {
                 console.log("No Valids to be chosen");
             }
+            this.aChosen = aFinalList; 
+            var aBlankRooms = arrayShuffle(aPosters);
+            var iLastStep = this.aChosen[this.aChosen.length - 1].iStep
+            this.aRAM = [];
+            for(var i=0; i<iLastStep ; i++){
+              var newLine = {"iStep":i+1, "sRoomName":aBlankRooms[i].name }
+              // TODO : lookup the matching step 
+              //var newLine = {"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName }
+              this.aRAM.push(newLine); 
+            }
+
+            // TODO : recomment this when the lookup works
+            this.aRAM = clone(aFinalList);
+            console.log("this.aRAM", this.aRAM)//, "aBlankRooms", aBlankRooms)
             return aFinalList;
         },
         
@@ -208,11 +216,6 @@
         
         //the guts stips out invalid options
         genValidList:function(iStep, sType, iCurrVal, sCurrentOperation, iStepsMapped, sCurrentRoom, aCurrInstrSet) {
-            //console.log("iStep =", iStep); console.log("sType =", sType); console.log("iCurrVal =", iCurrVal);console.log("sCurrentOperation =", sCurrentOperation);
-            //console.log("iStepsMapped =", iStepsMapped);
-            ///console.log("sCurrentRoom =", sCurrentRoom);
-            //console.log("aCurrInstrSet =", aCurrInstrSet.length);
-            
             var aNextValid = aCurrInstrSet.filter(function(aInstruction){
                 if (aInstruction.sRoomName === sCurrentRoom)
                 { 
@@ -389,7 +392,6 @@
             var oWorksheet = Object.create(Worksheet);
             oWorksheet.init(j+1, iCurrLevel, options.groupname);
             var aValid = oWorksheet.createValidList();
-            //console.log("aValid.length =", aValid.length);
             var aChosen = oWorksheet.getChosen();
             aWorksheets.push(oWorksheet);
             console.log("Worksheet calculation complete", iCurrLevel, j);
@@ -413,47 +415,3 @@
       if (err){ return console.log(err);}
       console.log('worksheets_html > worksheets.html');
     });
-
-
-    /* // PDF creation not needed anymore
-    phantom.create(function (ph) {                                                          
-      ph.createPage(function (door_page) {
-        door_page.set('paperSize', {
-          format: 'A4'
-        }, function() {
-          page.open(options.outputdir+"/posters.html", function (status) {
-            page.render(options.outputdir+"/posters.pdf", function(){
-              console.log("Posters sheets rendered ", status);
-              ph.exit();
-            });
-          });
-        });
-      });
-  });
-
-
-  
-    phantom.create(function (ph) {                                                          
-        //console.log("creating phantom for "+sPersonID);
-        ph.createPage(function (page) {
-          //console.log("creating page for "+sPersonID);
-          page.set('paperSize', {
-            format: 'A4'
-          }, function() {
-            // continue with page setup
-            page.open(options.outputdir+"/teachers.html", function (status) {
-              page.render(options.outputdir+"/teachers.pdf", function(){
-                console.log("Teachers sheets rendered ", status);
-                  
-                page.open(options.outputdir+"/worksheets.html", function (status) {
-                  page.render(options.outputdir+"/worksheets.pdf", function(){
-                    console.log("Worksheets sheets rendered ", status);
-                    ph.exit();
-                  });
-                });
-              });
-            });
-          });
-        });
-    });
-    */

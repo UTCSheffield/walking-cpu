@@ -1,166 +1,172 @@
 <html>
-    <head>
-          <link href="../css/cpu.css" rel="stylesheet" type="text/css" media="all">
-    
-    </head>
-    <body>
-        {{#aWorksheets}}
-        <div class="worksheet">
-          <div class="printpage">
-            <h1>School as a CPU : {{sGroupName}} : {{oLevel.sGrade}}/{{iSheetNumber}}</h1>
-            
-            <table class="student">
-              <!--<tr>
-                <th>Level</th><td>{{oLevel.sLevelName}} / {{oLevel.sGrade}}</td>
-                <th>Sheet Number</th><td>{{iSheetNumber}}</td>
-              </tr>-->
-                <tr>
-                  <th>Student Name</th><td>&nbsp;</td>
-                  <th>Date</th><td>&nbsp;</td>
-                </tr>
-            </table>
-            
-            <div class="diagram">
-              <img alt="" src="../cycle-3.svg">
-              <div class="box fetch">
-                <h4>Fetch</h4>
-                <ul>{{{oLevel.fetch}}}</ul>
-              </div>
-              <div class="box decode">
-                <h4>Decode</h4>
-                <ul>{{{oLevel.decode}}}</ul>
-              </div>
-              <div class="box execute">
-                <h4>Execute</h4>
-                <ul>{{{oLevel.execute}}}</ul>
-              </div>
+  <head>
+    <link href="../css/cpu.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+    {{#aWorksheets}}
+      <div class="worksheet">
+        <div class="printpage">
+          <h1>School as a CPU : {{sGroupName}} : {{oLevel.sGrade}}/{{iSheetNumber}}</h1>
+          
+          <table class="student">
+            <!--<tr>
+              <th>Level</th><td>{{oLevel.sLevelName}} / {{oLevel.sGrade}}</td>
+              <th>Sheet Number</th><td>{{iSheetNumber}}</td>
+            </tr>-->
+            <tr>
+              <th>Student Name</th><td>&nbsp;</td>
+              <th>Date</th><td>&nbsp;</td>
+            </tr>
+          </table>
+          
+          <div class="diagram">
+            <img alt="" src="../cycle-3.svg">
+            <div class="box fetch">
+              <h4>Fetch</h4>
+              <ul>{{{oLevel.fetch}}}</ul>
             </div>
-            
-            <table>
+            <div class="box decode">
+              <h4>Decode</h4>
+              <ul>{{{oLevel.decode}}}</ul>
+            </div>
+            <div class="box execute">
+              <h4>Execute</h4>
+              <ul>{{{oLevel.execute}}}</ul>
+            </div>
+          </div>
+          
+          <div class="ram_sim">
+            <div class="ram">
+              <h3>Your Program  <br />/ RAM </h3>
+              <table>
                 <tr>
-                  <th colspan="2" class="h3">Your Program  <br />/ RAM </th>
-                  <td class="gap">&nbsp;</td>
-                  <th class="h3" colspan="{{#if oLevel.gradeA}}6{{else}}5{{/if}}">Your Simulation  <br />/ CPU</th>
-                </tr> 
-                <tr>
-                    <th class="ram">RAM Address</th>
-                    <th class="physical">Physical Location</th>
-                    <td class="gap">&nbsp;</td>
-                    <th>Memory Address Register (MAR)<!-- / Data--></th>
-                    <!--<th>Data</th>-->
-                    <th>Memory Data Register (MDR)<!-- / Data--></th>
-                    {{#if oLevel.gradeA}}
-                        <!--<th>Operation</th>-->
-                        <th>Current Instruction Register (CIR) / Operation </th>
-                        <th>Operand</th>
-                    {{else}}
-                      <th>Decoded</th>
-                    
-                    {{/if}}
-                    <th>Accumulator (ACC)</th>
-                    <th>Program Counter</th>
+                  <th class="ram">RAM Address</th>
+                  <th class="physical">Physical Location</th>
                 </tr>
                 <tr>
                   <td>0</td>
                   <td class="firstnumber" >Start</td>
-                  <td class="gap">&nbsp;</td>
-                  <td class="firstnumber" colspan="{{#if oLevel.gradeA}}4{{else}}3{{/if}}"></td>
-                  <td>
-                   {{iSheetNumber}}
-                  </td>
-                  <td>1</td>
                 </tr>
                 {{#aChosen}}<tr>
-                    <td>{{iStep}}</td>
-                    <td>{{sRoomName}}</td>
-                    <td class="gap">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    {{#if ../oLevel.gradeA}}
-                        {{#if ../oLevel.gradeAA}}
-                           <td>&nbsp;</td>
-                        {{else}}
-                            <td {{#if bListOperand}}class="blocked"{{/if}}>&nbsp;</td>
-                        {{/if}}
-                    {{else}}
-                        <td>&nbsp;</td>
-                    {{/if}}
-                    {{#if ../oLevel.gradeA}}
-                        {{#if ../oLevel.gradeAA}}
-                           <td>&nbsp;</td>
-                        {{else}}
-                            <td {{#if bListOperation}}class="blocked"{{/if}}>&nbsp;</td>
-                        {{/if}}
-                    {{/if}}
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                  <td>{{iStep}}</td>
+                  <td>{{sRoomName}}</td>
                 </tr>{{/aChosen}}
-            </table>
-          </div>
-          <div class="printpage">
-            <div class="instructions">
-              <h2>Instruction Set</h2>
-              <table>
-                  <tr>
-                      <th>Data</th>
-                      
-                      {{#if oLevel.gradeB}}
-                          <th>Operation</th>
-                          <th>Operand</th>
-                      {{else}}
-                          <th>Instruction</th>
-                      {{/if}}
-                  </tr>
-                  {{#aInstructions}}<tr>
-                      <td>{{sData}}</td>
-                      {{#if ../oLevel.gradeB}}
-                          <td>{{operation}}</td>
-                          <td>{{operand}}</td>
-                      {{else}}
-                          <td>{{operation}}{{operand}}</td>
-                      {{/if}}
-                  </tr>
-                  {{/aInstructions}}
               </table>
             </div>
-            
-            <div class="notes">
-            
-              {{#if oLevel.gradeA}}
-                <h2>Op Codes - Which do not need an operand.</h2>
-                <dt>INC</dt><dd>Increment the Accumulator (add 1 to it)</dd>
-                <dt>DEC</dt><dd>Decrement the Accumulator (subtract 1 from it)</dd>
-                <dt>NOP</dt><dd>No Operation (Do nothing)</dd>
-              
-              {{/if}}
-            
-              <h2>Notes</h2>
-              
-              <h3>All computers</h3>
-              <ul>
-                  <li>Fetch (binary data from RAM)</li>
-                  <li>Decode (that data into operations and numbers)</li>
-                  <li>Execute (the operations with the numbers)</li>
-              </ul>
-              
-              {{#if oLevel.gradeB}} 
-              <h3>All Practical Computers</h3>
-              <ul>
-                  <li>Store the operations and other data in separate memory addresses</li>
-                  <li>One operation or number in each space in RAM</li>
-                  <li>There will be an instruction which means Add (+), this will take the Accumulator and add it to the number in the next RAM address.</li>
-              </ul>
-              {{/if}}
-              
-              {{#if oLevel.gradeA}}
-              <h3>Von Nuemann Architecture CPUs</h3>
-              <ul>
-                  <li>Data in RAM can represent instructions or numbers</li>
-              </ul>
-              {{/if}}
+            <div class="sim">
+              <h3>Your Simulation  <br />/ CPU</h3>
+              <table>
+                <tr>
+                  <th>Memory Address Register (MAR)<!-- / Data--></th>
+                  <!--<th>Data</th>-->
+                  <th>Memory Data Register (MDR)<!-- / Data--></th>
+                  {{#if oLevel.gradeA}}
+                      <!--<th>Operation</th>-->
+                      <th>Current Instruction Register (CIR) / Operation </th>
+                      <th>Operand</th>
+                  {{else}}
+                    <th>Decoded</th>
+                  {{/if}}
+                  <th>Accumulator (ACC)</th>
+                  <th>Program Counter</th>
+                </tr>
+                <tr>
+                  <td class="firstnumber" colspan="{{#if oLevel.gradeA}}4{{else}}3{{/if}}"></td>
+                  <td>{{iSheetNumber}}</td>
+                  <td>1</td>
+                </tr>
+                {{#aChosen}}
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    {{#if ../oLevel.gradeA}}
+                      {{#if ../oLevel.gradeAA}}
+                        <td>&nbsp;</td>
+                      {{else}}
+                        <td {{#if bListOperand}}class="blocked"{{/if}}>&nbsp;</td>
+                      {{/if}}
+                    {{else}}
+                      <td>&nbsp;</td>
+                    {{/if}}
+                    {{#if ../oLevel.gradeA}}
+                      {{#if ../oLevel.gradeAA}}
+                        <td>&nbsp;</td>
+                      {{else}}
+                        <td {{#if bListOperation}}class="blocked"{{/if}}>&nbsp;</td>
+                      {{/if}}
+                    {{/if}}
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                {{/aChosen}}
+              </table>
             </div>
           </div>
         </div>
-        {{/aWorksheets}}
-    </body>
+        <div class="printpage">
+          <div class="instructions">
+            <h2>Instruction Set</h2>
+            <table>
+                <tr>
+                    <th>Data</th>
+                    
+                    {{#if oLevel.gradeB}}
+                        <th>Operation</th>
+                        <th>Operand</th>
+                    {{else}}
+                        <th>Instruction</th>
+                    {{/if}}
+                </tr>
+                {{#aInstructions}}<tr>
+                    <td>{{sData}}</td>
+                    {{#if ../oLevel.gradeB}}
+                        <td>{{operation}}</td>
+                        <td>{{operand}}</td>
+                    {{else}}
+                        <td>{{operation}}{{operand}}</td>
+                    {{/if}}
+                </tr>
+                {{/aInstructions}}
+            </table>
+          </div>
+          
+          <div class="notes">
+          
+            {{#if oLevel.gradeA}}
+              <h2>Op Codes - Which do not need an operand.</h2>
+              <dt>INC</dt><dd>Increment the Accumulator (add 1 to it)</dd>
+              <dt>DEC</dt><dd>Decrement the Accumulator (subtract 1 from it)</dd>
+              <dt>NOP</dt><dd>No Operation (Do nothing)</dd>
+            
+            {{/if}}
+          
+            <h2>Notes</h2>
+            
+            <h3>All computers</h3>
+            <ul>
+                <li>Fetch (binary data from RAM)</li>
+                <li>Decode (that data into operations and numbers)</li>
+                <li>Execute (the operations with the numbers)</li>
+            </ul>
+            
+            {{#if oLevel.gradeB}} 
+            <h3>All Practical Computers</h3>
+            <ul>
+                <li>Store the operations and other data in separate memory addresses</li>
+                <li>One operation or number in each space in RAM</li>
+                <li>There will be an instruction which means Add (+), this will take the Accumulator and add it to the number in the next RAM address.</li>
+            </ul>
+            {{/if}}
+            
+            {{#if oLevel.gradeA}}
+            <h3>Von Nuemann Architecture CPUs</h3>
+            <ul>
+                <li>Data in RAM can represent instructions or numbers</li>
+            </ul>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/aWorksheets}}
+  </body>
 </html>

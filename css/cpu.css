@@ -7,21 +7,20 @@ td {
   font-family: Andale Mono,AndaleMono,monospace; 
 }
 
-
 div.worksheet {
     font-size:14px;
 }
 
 div.printpage {
-    padding:1cm 1cm 1cm 1cm;
+    clear: both;
+    junk-padding:1cm 1cm 1cm 1cm;
+    padding:0.5cm 0.5cm 0.5cm 0.5cm;
 }
-
 
 h1.teacher {
     padding:2cm 1cm 0cm 1cm;
     margin:0cm;
 }
-
 
 div.teacher {
     font-size:12px;
@@ -37,7 +36,6 @@ div.teacher:first-child {
     padding:0cm 1cm 0cm 1cm;
 }
 
-
 div.teacher h2{
     padding:0cm;
     margin:0cm;
@@ -49,10 +47,6 @@ div.worksheet table{
 
 div.teacher table{
   font-size:12px;
-}
-
-
-h1{
 }
 
 table {
@@ -71,7 +65,6 @@ table, td, th {
 th, td{
   width:20%;
 }
-
 
 .worksheet th, .worksheet td{
   width:16%;
@@ -96,7 +89,6 @@ th, td{
   padding-bottom: 1em;
 }
 
-
 .worksheet th.ram , .worksheet td.ram{
   width:12%;
 }
@@ -108,7 +100,6 @@ th, td{
 div.worksheet div.student th, div.worksheet div.student td{
   width:24%;
 }
-
 
 .old div.worksheet div.diagram {
  background-image: url('../cycle-3.svg');
@@ -125,7 +116,6 @@ div.worksheet div.diagram {
     margin:0;
     text-align: center;  
 }
-
 
 div.worksheet div.diagram img{
     height: 350px;
@@ -157,38 +147,36 @@ div.worksheet div.diagram div.box ul{
 }
   
 div.worksheet div.diagram div.fetch{
-    left:30%;
-    top:-330px;
-    height:150px;
+  left:30%;
+  top:-330px;
+  height:150px;
 }
 
 div.worksheet div.diagram div.decode{
-    left:55%;
-    top:-330px;
+  left:55%;
+  top:-330px;
 }
 
-
 div.worksheet div.diagram div.execute{
-    left:5%;
-    top: -480px;
+  left:5%;
+  top: -480px;
 }
 
 div.worksheet div.diagram div h4{
-    padding:0px;
-    margin:0px;
+  padding:0px;
+  margin:0px;
 }
 
 div.worksheet div.notes {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 div.worksheet div.instructions table{
-    font-size: 14px;
+  font-size: 14px;
 }
 
-
 div.printpage {
-    page-break-after: always;
+  page-break-after: always;
 }
 
 div.poster h1 {
@@ -199,7 +187,6 @@ div.poster h1 {
 div.poster h1.roomname {
   font-size:500%;
 }
-
 
 div.poster h1.data {
   font-family: Andale Mono,AndaleMono,monospace; 
@@ -212,7 +199,12 @@ td.firstnumber{
   background-color:rgba(225,225,225,0.95);
 }
 
-/*td.blocked {
-  background-color: black; 
-}*/
+div.ram{
+  float:left;
+  width: 25%;
+}
 
+div.sim{
+  float:right;
+  width: 70%;
+}
