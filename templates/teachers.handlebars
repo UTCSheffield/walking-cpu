@@ -16,16 +16,17 @@
             <br />
             <table>
                 <tr>
-                    <th>RAM Address</th>
+                    <th>MAR</th>
                     <th>Physical Location</th>
-                    <th>Data</th>
+                    <th>Data / MDR</th>
                     {{#if oLevel.gradeB}}
-                        <th>Operation</th>
+                        <th>CIR / Operation</th>
                         <th>Operand</th>
                     {{else}}
                         <th>Decoded</th>
                     {{/if}}
-                    <th>Accumulator</th>
+                    <th>ACC</th>
+                    <th>Program Counter</th>
                 </tr>
                 {{#aChosen}}<tr>
                     <td>{{iStep}}</td>
@@ -38,6 +39,7 @@
                         <td>{{sDisplay}}</td>
                     {{/if}}
                     <td>{{iResult}}</td>
+                    <td>{{iNextStep}}</td>
                 </tr>{{/aChosen}}
             </table>
         </div>

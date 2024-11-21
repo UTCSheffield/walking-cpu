@@ -103,7 +103,7 @@
     {
         "sLevelName":"Proper CPU",
         "sGrade":"GCSE 7",
-        "iSteps":10,
+        "iSteps":12,
         "gradeAA": true,
         "gradeA": true,
         "gradeB": true,

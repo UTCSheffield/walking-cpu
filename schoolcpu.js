@@ -3,9 +3,8 @@
     var util = require('util');
     var Handlebars = require("handlebars");
     var fs = require('fs');
-    var phantom = require('phantom');
     var arrayShuffle = require("array-shuffle");
-const { maxHeaderSize } = require('http');
+    const { maxHeaderSize } = require('http');
     var ArgumentParser = require('argparse').ArgumentParser;
 
     var parser = new ArgumentParser({
@@ -101,6 +100,7 @@ const { maxHeaderSize } = require('http');
         return index + previousValue + currentValue.charCodeAt(0);
     },0);
     var mt = new Random.MT( iClass );
+    //var mt = new Random();
                 
     // TODO : Refactor Instuction Set into Levels
     // TODO : Add sorting on hardeness of the actuall maths (possibly by size of final figure)
@@ -175,27 +175,16 @@ const { maxHeaderSize } = require('http');
             }
             this.aChosen = aFinalList; 
             var aBlankRooms = arrayShuffle(aPosters);
-            var iLastStep = this.aChosen[this.aChosen.length - 1].iStep
+            
             this.aRAM = [];
-            for(var i=0; i<this.aChosen.length ; i++){
-              this.aRAM.push({"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName,"bPadding": false })
-              for(var j=this.aChosen[i].iStep+1; j<this.aChosen[Math.min(i+1,this.aChosen.length-1)].iStep-1 ; j++){
-                this.aRAM.push({"iStep":j, "sRoomName":aBlankRooms[j].name,"bPadding": true})
+            for(var i=0; i<this.aChosen.length ; i++){ //For each step in the program
+              this.aRAM.push({"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName,"bPadding": false }) // put the step into RAM display variable
+              for(var j=this.aChosen[i].iStep+1; j<this.aChosen[Math.min(i+1,this.aChosen.length-1)].iStep ; j++){ //loop around any gap where a JMP happens
+                this.aRAM.push({"iStep":j, "sRoomName":aBlankRooms[j].name,"bPadding": true}) // Add the padding so the RAM looks right
               } 
             }
-           
-            /*for(var i=0; i<iLastStep ; i++){
-              var newLine = {"iStep":i+1, "sRoomName":aBlankRooms[i].name }
-              // TODO : lookup the matching step 
-              //var newLine = {"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName }
-              this.aRAM.push(newLine); 
-            }*/
-
-
-            // TODO : recomment this when the lookup works
-            //this.aRAM = clone(aFinalList);
-            console.log("this.aRAM", this.aRAM)//, "aBlankRooms", aBlankRooms)
-            return aFinalList;
+            //console.log("this.aRAM", this.aRAM)
+           return aFinalList;
         },
         
         getLevel:function(aList, iLevel, aSelected) {
@@ -344,6 +333,8 @@ const { maxHeaderSize } = require('http');
             });
             
             //Get rid of things that don't give sane answers 
+            //console.log("this.iSteps", this.iSteps)
+            var iMaxSteps = this.iSteps
             var aIntList = aProcessed.filter(function(val, index, org){
                 if (Math.round(val.iResult) !== val.iResult)
                 {
@@ -357,14 +348,24 @@ const { maxHeaderSize } = require('http');
                 
                 // TODO : make this limit part of the level
                 //if (val.iResult > this.oLevel.iMaxNumber) {
-                if (val.iResult > 500) {
+                if (val.iResult > 200) {
                     return false;
                 }
                 
+                if(val.sNextType == "operand" && val.iNextStep > iMaxSteps)
+                {
+                    return false
+                }
+                
                 //Would a JMP take us out of the program?
-                if(val.iNextStep >= this.iSteps || val.iNextStep <= val.iStep)
+                if(val.sCurrentOperation == "JMP" && val.sType == "operand" && (val.iNextStep >= iMaxSteps || val.iNextStep <= val.iStep))
                 { 
                     return false;
+                }
+
+                if(val.sNextType == "operand" && val.iNextStep > iMaxSteps)
+                {
+                    return false
                 }
                 
                 return true;
