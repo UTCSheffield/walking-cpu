@@ -5,6 +5,7 @@
     var fs = require('fs');
     var phantom = require('phantom');
     var arrayShuffle = require("array-shuffle");
+const { maxHeaderSize } = require('http');
     var ArgumentParser = require('argparse').ArgumentParser;
 
     var parser = new ArgumentParser({
@@ -176,15 +177,23 @@
             var aBlankRooms = arrayShuffle(aPosters);
             var iLastStep = this.aChosen[this.aChosen.length - 1].iStep
             this.aRAM = [];
-            for(var i=0; i<iLastStep ; i++){
+            for(var i=0; i<this.aChosen.length ; i++){
+              this.aRAM.push({"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName,"bPadding": false })
+              for(var j=this.aChosen[i].iStep+1; j<this.aChosen[Math.min(i+1,this.aChosen.length-1)].iStep-1 ; j++){
+                this.aRAM.push({"iStep":j, "sRoomName":aBlankRooms[j].name,"bPadding": true})
+              } 
+            }
+           
+            /*for(var i=0; i<iLastStep ; i++){
               var newLine = {"iStep":i+1, "sRoomName":aBlankRooms[i].name }
               // TODO : lookup the matching step 
               //var newLine = {"iStep":this.aChosen[i].iStep, "sRoomName":this.aChosen[i].sRoomName }
               this.aRAM.push(newLine); 
-            }
+            }*/
+
 
             // TODO : recomment this when the lookup works
-            this.aRAM = clone(aFinalList);
+            //this.aRAM = clone(aFinalList);
             console.log("this.aRAM", this.aRAM)//, "aBlankRooms", aBlankRooms)
             return aFinalList;
         },
