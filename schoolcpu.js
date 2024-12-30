@@ -436,8 +436,8 @@
     });
 
     // copy directory
-    fs.cp('./static', './output/', { recursive: true }, (err) => {
+    fs.cp('./static', './'+options.outputdir+'/', { recursive: true }, (err) => {
         if (err) {
-            console.error(err);
+            console.error(err); 
         }
     });

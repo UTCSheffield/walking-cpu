@@ -1,6 +1,9 @@
 {
   "name": "walking-cpu",
   "version": "0.0.1",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "Educational exercise about the Fetch Decode Execute cycle",
   "main": "schoolcpu.js",
   "dependencies": {
@@ -8,16 +11,32 @@
     "mustache": "~0.8.1",
     "handlebars": "~2.0.0-alpha.4",
     "rng": "~0.2.2",
-    "phantom": "~0.8.0",
-    "pdfkit": "~0.6.2",
     "array-shuffle": "~1.0.0",
     "argparse": "~1.0.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node schoolcpu.js -n 20,10,0,0",
-    "start": "npm run build; npx http-server output/"
+    "build": "node schoolcpu.js -n 2,2,2,2 -o build -l OCR-GCSE -r UTCOLP",
+    "start": "npm run build; npx http-server build/"
+  },
+  "glitch": {
+    "projectType": "generated_static",
+    "watch": {
+      "install": {
+        "include": [
+          "^package\\.json$"
+        ],
+        "exclude": []
+      },
+      "restart": {
+        "include": [
+          "^\\.*$"
+        ],
+        "exclude": []
+      },
+      "noSavedEvents": true
+    }
   },
   "repository": {
     "type": "git",
