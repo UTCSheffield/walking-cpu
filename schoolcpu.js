@@ -436,7 +436,7 @@
     });
 
     // copy directory
-    fs.cp('./css', './output/css', { recursive: true }, (err) => {
+    fs.cp('./static', './output/', { recursive: true }, (err) => {
         if (err) {
             console.error(err);
         }
