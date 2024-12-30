@@ -21,7 +21,7 @@ The *package.json* file build line allows you to change the numbers of each of t
 
 When you change any of the configs or the settings in package,json the project will rebuild
 
-Our version is 
+Our version is available to veiw [here](https://utc-olp-walking-cpu.glitch.me/) or [remix it](https://glitch.com/edit/#!/remix/utc-olp-walking-cpu)
 
 
 ## Both 
