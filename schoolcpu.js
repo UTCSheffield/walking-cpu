@@ -35,7 +35,7 @@
       [ '-g', '--group' ],
       {
         help: "Group Name",
-        defaultValue: "default",
+        defaultValue: "Default",
         dest:"groupname"
       }
     );
@@ -85,7 +85,16 @@
         }
     }
 
-    door_page = fs.readFileSync("templates/Posters.handlebars", "utf8");
+    index_page = fs.readFileSync("templates/index.handlebars", "utf8");
+    var oIndexTemplate = Handlebars.compile(index_page);
+    index_html = oIndexTemplate();
+        
+    fs.writeFile(options.outputdir+"/index.html", index_html, function (err) {
+      if (err){ return console.log(err);}
+      console.log('html > index.html');
+    });
+
+    door_page = fs.readFileSync("templates/posters.handlebars", "utf8");
     var oPostersTemplate = Handlebars.compile(door_page);
     door_html = oPostersTemplate({"aPosters":aPosters});
         
@@ -424,4 +433,11 @@
     fs.writeFile(options.outputdir+"/worksheets.html", worksheets_html, function (err) {
       if (err){ return console.log(err);}
       console.log('worksheets_html > worksheets.html');
+    });
+
+    // copy directory
+    fs.cp('./css', './output/css', { recursive: true }, (err) => {
+        if (err) {
+            console.error(err);
+        }
     });
