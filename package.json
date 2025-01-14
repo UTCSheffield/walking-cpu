@@ -17,7 +17,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node schoolcpu.js -n 2,2,2,2 -o build -l OCR-GCSE -r UTCOLP",
+    "build-oe": "node schoolcpu.js -n 3,3,3,3 -o build -l UTCOLPOpenEvening -r UTCOLPOpenEvening -g 'Open Evening' ",
+    "build": "node schoolcpu.js -n 21,21,1,1 -o build -l OCR-GCSE -r UTCOLP -g Y9CO1 ",
     "start": "npm run build; npx http-server build/"
   },
   "glitch": {
@@ -31,7 +32,7 @@
       },
       "restart": {
         "include": [
-          "^\\.*$"
+          ""
         ],
         "exclude": []
       },
