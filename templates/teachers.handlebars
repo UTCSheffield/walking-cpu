@@ -5,6 +5,19 @@
     </head>
     <body>
         <h1 class="teacher">School as a CPU : {{sGroupName}}</h1>
+        <table>
+          <tr>
+            <th>Physical Location</th>
+            <th>Data</th>
+          </tr>
+          {{#aPosters}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{data}}</td>
+            </tr>
+          {{/aPosters}}
+        </table>
+      
         
         {{#aWorksheets}}
         <div class="teacher">

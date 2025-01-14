@@ -6,7 +6,7 @@
     var arrayShuffle = require("array-shuffle");
     const { maxHeaderSize } = require('http');
     var ArgumentParser = require('argparse').ArgumentParser;
-
+ 
     var parser = new ArgumentParser({
       version: '0.0.1',
       addHelp:true,
@@ -16,11 +16,11 @@
     parser.addArgument(
       [ '-n', '--numbers' ],
       {
-        help: "How many of each level C,B,A,A*",
+        help: "How many of each GCSE level 4,5,6,7",
         defaultValue: "2,2,2,2",
         dest:"numbers"
       }
-    );
+    ); 
     
     parser.addArgument(
       [ '-o', '--output' ],
@@ -47,7 +47,7 @@
         defaultValue: "default",
         dest:"levelconfig"
       }
-    );
+    ); 
     
     parser.addArgument(
       [ '-r', '--rooms' ],
@@ -77,22 +77,15 @@
     
     var aPosters = [];
     for(var i = 0; i<aInstructionNames.length; i++) {
-        for(var j = 0; j<aRoomGroups[i].length; j++) {
-            aPosters.push({
-                "data":aInstructionNames[i],
-                "name":aRoomGroups[i][j]
-            });
+        if (i < aRoomGroups.length){
+          for(var j = 0; j<aRoomGroups[i].length; j++) {
+              aPosters.push({
+                  "data":aInstructionNames[i],
+                  "name":aRoomGroups[i][j]
+              });
+          }
         }
     }
-
-    index_page = fs.readFileSync("templates/index.handlebars", "utf8");
-    var oIndexTemplate = Handlebars.compile(index_page);
-    index_html = oIndexTemplate();
-        
-    fs.writeFile(options.outputdir+"/index.html", index_html, function (err) {
-      if (err){ return console.log(err);}
-      console.log('html > index.html');
-    });
 
     door_page = fs.readFileSync("templates/posters.handlebars", "utf8");
     var oPostersTemplate = Handlebars.compile(door_page);
@@ -125,7 +118,8 @@
         oLevel.aRoomInstructions = [];
         
         for(var i = 0; i<oLevel.aInstructions.length; i++) {
-            if(typeof oLevel.aInstructions[i].limit === "undefined") {
+          if (i < aRoomGroups.length){
+            if(typeof oLevel.aInstructions[i].limit === "undefined" ) {
               oLevel.aInstructions[i].limit = aRoomGroups[i].length;
             }
             for(var j = 0; j<oLevel.aInstructions[i].limit; j++) {
@@ -134,8 +128,8 @@
                 oRoomInstructions.sRoomName = aRoomGroups[i][j];
                 oLevel.aRoomInstructions.push(oRoomInstructions);
             }
+          }
         }
-        
         return oLevel;
     });
     
@@ -322,6 +316,7 @@
                         iResult = iCurrVal - aNewLine.operand;
                         break;
                     case "x":
+                    case "*":
                         iResult = iCurrVal * aNewLine.operand;
                         break;
                     case "/":
@@ -419,21 +414,34 @@
     
     var teachers_page = fs.readFileSync("templates/teachers.handlebars", "utf8");
     var oTeachersTemplate = Handlebars.compile(teachers_page);
-    var teachers_html = oTeachersTemplate({"aWorksheets":aWorksheets, "sGroupName":options.groupname});
+    var teachers_html = oTeachersTemplate({"aWorksheets":aWorksheets,
+                                           "sGroupName":options.groupname,
+                                           "aPosters":aPosters});
         
     fs.writeFile(options.outputdir+"/teachers.html", teachers_html, function (err) {
       if (err){ return console.log(err);}
       console.log('html > teachers.html');
     });
 
-    worksheets_page = fs.readFileSync("templates/worksheets.handlebars", "utf8");
+    var worksheets_page = fs.readFileSync("templates/worksheets.handlebars", "utf8");
     var oWorksheetsTemplate = Handlebars.compile(worksheets_page);
-    worksheets_html = oWorksheetsTemplate({"aWorksheets":aWorksheets});
+    var worksheets_html = oWorksheetsTemplate({"aWorksheets":aWorksheets});
         
     fs.writeFile(options.outputdir+"/worksheets.html", worksheets_html, function (err) {
       if (err){ return console.log(err);}
       console.log('worksheets_html > worksheets.html');
     });
+
+
+    var index_page = fs.readFileSync("templates/index.handlebars", "utf8");
+    var oIndexTemplate = Handlebars.compile(index_page);
+    var index_html = oIndexTemplate({"aWorksheets":aWorksheets, "sGroupName":options.groupname, "oOptions":options});
+        
+    fs.writeFile(options.outputdir+"/index.html", index_html, function (err) {
+      if (err){ return console.log(err);}
+      console.log('html > index.html');
+    });
+
 
     // copy directory
     fs.cp('./static', './'+options.outputdir+'/', { recursive: true }, (err) => {
