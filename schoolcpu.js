@@ -29,7 +29,7 @@
         defaultValue: "output",
         dest:"outputdir"
       }
-    );
+    ); 
     
     parser.addArgument(
       [ '-g', '--group' ],
